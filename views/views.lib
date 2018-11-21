@@ -1,0 +1,40 @@
+<?php
+session_start();
+function index() {
+    header('location: ../index.php');
+}
+
+function db() {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "userdb";
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    return $conn;
+}
+
+function nav_button($name, $link) {
+    $btn = '<ul class="nav"><li class="nav-item"><a class="nav-link btn-primary" href="'.$link.'">'.$name.'</a></li></ul>';
+    return $btn;
+}
+
+function register_class($crn, $name) {
+    $conn = db();
+    $sql = "INSERT INTO class VALUES(".$crn.",'".$name."','".$_SESSION['username']."')";
+    if($conn->query($sql)) {
+        $conn->close();
+        index();
+    } else {
+        echo "Error: ".$mysqli_erro;
+    }
+
+}
+
+function register_student() {
+
+}
+
+?>
