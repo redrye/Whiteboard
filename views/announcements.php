@@ -1,15 +1,12 @@
 <?php
     session_start();
+    require('views.lib');
     $crn = $_GET['crn'];
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "userdb";
 $crn = $_GET['crn'];
 $_SESSION['crn'] = $crn;
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = db();
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

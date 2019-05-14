@@ -8,7 +8,18 @@
     if($query->num_rows == 1) {
             register_class($crn, $name);
     } else {
-        register_student();
+        $sql = "SELECT name FROM class WHERE crn=".$crn;
+        $query = $conn->query($sql);
+        if($query->num_rows == 1) {
+            $result = $query->fetch_all(MYSQLI_ASSOC);
+            $name = $result[0]['name'];
+            $sql = "INSERT INTO register VALUES (".$crn.", '".$name."', '".$_SESSION['username']."')";
+            $conn->query($sql);
+            echo "<script>function redirect(url){ 
+                window.location=url; 
+            }
+            redirect('index.php');</script>";
+        }
     }
     $conn->close();
 ?>

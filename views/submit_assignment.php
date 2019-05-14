@@ -1,11 +1,9 @@
 <?php
     session_start();
-    $servername = "localhost";
-    $username = "root";
-    $password = "password";
-    $dbname = "userdb";
+    require('views.lib');
     $crn = $_SESSION['crn'];
     
+    $conn = db();
     echo '<form action="assignment_upload.php" method="post" enctype="multipart/form-data">
     Select image to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">

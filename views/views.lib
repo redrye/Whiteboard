@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 function index() {
     header('location: ../index.php');
 }
@@ -34,7 +34,18 @@ function register_class($crn, $name) {
 }
 
 function register_student() {
-
+    $conn = db();
+    $sql = "SELECT name FROM class WHERE crn=".$crn;
+    $query = $con->query($sql);
+    print_r($query->fetch_all(MYSQL_ASSOC));
+    die();
+    if($conn->query($sql)) {
+        $sql = "INSERT INTO register VALUES(".$crn.",'".$name."','".$_SESSION['username']."')";
+        $conn->close();
+        
+    } else {
+        echo "Error: ".$mysqli_erro;
+        }
 }
 
 ?>

@@ -5,6 +5,9 @@
 
   // Destroy the session.
   session_destroy();
-  header("Location: ../login.php");
+   echo "<script>function redirect(url){ 
+                window.location=url; 
+            }
+            redirect('index.php');</script>";
   exit;
 ?>

@@ -27,8 +27,11 @@ $sql_instructor = "SELECT instructor FROM class WHERE instructor='".$_SESSION['u
 
 if ($result = $conn->query($sql_student)) {
 	if($result->num_rows > 0) {
-        $avgSQL = "select sum(grade * weight)/sum(over) FROM (select grade, weight, 100*weight as over from grades where student='".$_SESSION['username']."' AND crn='".$crn."' group by grade) a";
+        
+        $avgSQL = "select sum(grade * weight)/sum(over) FROM (select grade, weight, weight as over from grades where student='".$_SESSION['username']."' AND crn='".$crn."' group by grade) a";
+        
         $getAvg = $conn->query($avgSQL);
+        
         $grade = $getAvg->fetch_assoc();
 		echo "<div class='card-header'>Grades   Avg: ".$grade['sum(grade * weight)/sum(over)']."</div><div class='card-body'><table class='table'><tr><th>Assignment</th><th>Grade</th></tr>";
 
